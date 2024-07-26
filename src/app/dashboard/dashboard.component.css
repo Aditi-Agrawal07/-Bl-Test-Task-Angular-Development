@@ -1,0 +1,16 @@
+.delta-btn{
+    background-color: rgb(122, 44, 174);
+    color: #fff;
+    border-radius: 20px;
+}
+.subtitle{
+    color: rgb(122, 44, 174);
+    font-weight: 500;
+}
+.card {
+    width: 100%;  /* Adjust as needed */
+    height: 100%; /* Adjust as needed */
+   /* Ensure content stays within the card */
+  }
+
+ 
