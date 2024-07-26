@@ -25,7 +25,7 @@ export class DashboardComponent implements OnChanges {
   countryNames: string[] = [];
   data1: any;
   delta!: any;
-  result: any;
+  firstchartResult: any;
   secondChartResult: any
 
   constructor(
@@ -48,19 +48,22 @@ export class DashboardComponent implements OnChanges {
         // Fetch data based on the selected state and delta
         const data = await this.countryService.getselectedStateData();
         
-        if (data && this.selectedDelta in data) {
-          this.result = data[this.selectedDelta];
-          for (const key in data['districts']) {
-          
-            
-            if(key == this.selectedDistrict){
-            }
-            
+        if (data) {
+          if (this.selectedDelta in data) {
+            this.firstchartResult = data[this.selectedDelta];
+            console.log("Selected Delta Data:", this.firstchartResult);
           }
 
+          if (this.selectedDistrict && data.districts && data.districts[this.selectedDistrict]) {
+            this.secondChartResult = data.districts[this.selectedDistrict][this.selectedDelta];
+            console.log("Selected District Data:", this.secondChartResult);
+          } 
+         
           // Create charts
-          this.amChartService.createPieChart('chartdiv1', this.result);
-          this.amChartService.createPieChart('chartdiv2', this.result);
+          if(this.firstchartResult && this.secondChartResult){
+            this.amChartService.createPieChart('chartdiv1', this.firstchartResult);
+          this.amChartService.createPieChart('chartdiv2', this.secondChartResult);
+          }
           this.amChartService.createBarChart('barchart');
         }
     
